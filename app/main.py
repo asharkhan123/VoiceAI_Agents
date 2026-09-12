@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from typing import Optional
 import json
 
-from app.database import get_db, Base, engine, Patient
+from app.database import get_db
 from app.schemas import PatientCreate, PatientUpdate, PatientOut, APIResponse
 from app import crud
 
