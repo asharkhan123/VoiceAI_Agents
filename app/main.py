@@ -1,7 +1,7 @@
 import json
 from typing import Optional
 from fastapi import FastAPI, Depends, Query, Path, Request, status
-from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.responses import JSONResponse, HTMLResponse, RedirectResponse
 from sqlalchemy.orm import Session
 
 from app.database import get_db, SessionLocal
@@ -9,6 +9,11 @@ from app.schemas import PatientCreate, PatientUpdate, PatientOut, APIResponse
 from app import crud
 
 app = FastAPI(title="Voice AI Patient Registration API", version="1.0.0")
+
+# Root redirect to Dashboard
+@app.get("/", include_in_schema=False)
+def root_redirect():
+    return RedirectResponse(url="/dashboard")
 
 # Seed initial demonstration patient safely without locking SQLite
 @app.on_event("startup")
